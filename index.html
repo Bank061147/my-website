@@ -3,29 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เว็บแรกของฉัน</title>
+  <title>แนะนำตัว | Tuangwit Jantharat</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: sans-serif;
-      text-align: center;
-      background-color: #f0f4ff;
-      padding: 50px;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.7;
     }
-    h1 { color: #3b5bdb; }
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
+
+    /* ส่วนหัว */
+    header {
       background-color: #3b5bdb;
       color: white;
-      border: none;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header h1 { font-size: 40px; }
+    header p { font-size: 20px; margin-top: 10px; }
+
+    /* ทุกส่วนเนื้อหา */
+    section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section h2 {
+      color: #3b5bdb;
+      border-bottom: 3px solid #3b5bdb;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* ป้ายทักษะ */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill {
+      background-color: #dbe4ff;
+      color: #3b5bdb;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    /* ปุ่มติดต่อ */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #3b5bdb;
+      color: white;
+      text-decoration: none;
       border-radius: 8px;
-      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover { background-color: #2f4ac0; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>BXNK!</h1>
-  <p>นี่คือเว็บแรกของฉันที่ออนไลน์ได้จริง</p>
-  <button onclick="alert('ยินดีต้อนรับครับ!')">กดตรงนี้</button>
+
+  <header>
+    <h1>สวัสดีครับ ผมชื่อ Tuangwit Jantharat</h1>
+    <p>นักศึกษาสาขาคอมพิวเตอร์ / เทคโนโลยีสารสนเทศ</p>
+  </header>
+
+  <section>
+    <h2>เกี่ยวกับฉัน</h2>
+    <p>cim-comsci</p>
+  </section>
+
+  <section>
+    <h2>ทักษะ</h2>
+    <div class="skills">
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">PHP</span>
+      <span class="skill">MySQL</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>ติดต่อ</h2>
+    <p>สนใจพูดคุยหรือร่วมงาน ติดต่อได้ที่:</p>
+    <a class="btn" href="Bank@gmail.com">ส่งอีเมล</a>
+  </section>
+
+  <footer>
+    <p>สร้างด้วย HTML และ CSS</p>
+  </footer>
+
 </body>
 </html>
