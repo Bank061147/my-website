@@ -3,101 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แนะนำตัว | Tuangwit Jantharat</title>
+  <meta name="description" content="เว็บไซต์แนะนำตัวและรวมผลงานของนักศึกษาคอมพิวเตอร์">
+  <title>ชื่อของคุณ | Portfolio</title>
   <style>
+    :root {
+      --main: #3b5bdb;
+      --main-dark: #2f4ac0;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #212529;
+      --muted: #6c757d;
+      --soft: #dbe4ff;
+    }
+    body.dark {
+      --bg: #12141a;
+      --card: #1c1f29;
+      --text: #e9ecef;
+      --muted: #9aa0ad;
+      --soft: #2a3358;
+      --main: #748ffc;
+      --main-dark: #91a7ff;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+      font-family: "Sarabun", "Noto Sans Thai", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
+      transition: background .3s, color .3s;
     }
+    a { color: inherit; }
 
-    /* ส่วนหัว */
-    header {
-      background-color: #3b5bdb;
+    /* เมนูบน */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--card);
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    .nav-inner {
+      max-width: 1000px; margin: auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-weight: bold; font-size: 20px; color: var(--main); text-decoration: none; }
+    .menu { display: flex; gap: 22px; align-items: center; list-style: none; }
+    .menu a { text-decoration: none; color: var(--text); }
+    .menu a:hover { color: var(--main); }
+    .icon-btn {
+      background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text);
+    }
+    #burger { display: none; }
+
+    /* ส่วนแรก */
+    .hero {
+      text-align: center; padding: 90px 20px 70px;
+      background: linear-gradient(135deg, var(--main), #7048e8);
       color: white;
-      text-align: center;
-      padding: 80px 20px;
     }
-    header h1 { font-size: 40px; }
-    header p { font-size: 20px; margin-top: 10px; }
-
-    /* ทุกส่วนเนื้อหา */
-    section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: white; color: var(--main);
+      font-size: 52px; font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
     }
-    section h2 {
-      color: #3b5bdb;
-      border-bottom: 3px solid #3b5bdb;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-    }
-
-    /* ป้ายทักษะ */
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill {
-      background-color: #dbe4ff;
-      color: #3b5bdb;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
-    /* ปุ่มติดต่อ */
+    .hero h1 { font-size: 38px; }
+    .hero p { font-size: 19px; opacity: .95; margin: 8px 0 24px; }
     .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #3b5bdb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      margin-top: 10px;
+      display: inline-block; padding: 12px 26px; border-radius: 30px;
+      background: white; color: var(--main-dark); font-weight: bold;
+      text-decoration: none; margin: 4px; transition: transform .2s;
     }
-    .btn:hover { background-color: #2f4ac0; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn.outline { background: transparent; color: white; border: 2px solid white; }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #888;
+    /* ส่วนเนื้อหา */
+    section { max-width: 1000px; margin: auto; padding: 60px 20px 10px; }
+    section h2 {
+      font-size: 28px; color: var(--main); margin-bottom: 24px;
+      display: inline-block; border-bottom: 4px solid var(--main); padding-bottom: 4px;
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .info li { list-style: none; padding: 6px 0; border-bottom: 1px dashed var(--muted); }
+    .info b { color: var(--main); }
+
+    /* ทักษะ */
+    .skill { margin-bottom: 14px; }
+    .skill-top { display: flex; justify-content: space-between; font-weight: bold; }
+    .bar { height: 10px; background: var(--soft); border-radius: 10px; overflow: hidden; margin-top: 4px; }
+    .bar span { display: block; height: 100%; background: var(--main); border-radius: 10px; }
+
+    /* ผลงาน */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .card {
+      background: var(--card); border-radius: 14px; padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08); transition: transform .25s;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card .emoji { font-size: 38px; }
+    .card h3 { margin: 10px 0 6px; }
+    .card p { color: var(--muted); font-size: 15px; }
+    .tags { margin: 12px 0; display: flex; gap: 6px; flex-wrap: wrap; }
+    .tags span { background: var(--soft); color: var(--main); padding: 2px 10px; border-radius: 12px; font-size: 13px; }
+    .card a { color: var(--main); font-weight: bold; text-decoration: none; }
+
+    /* ติดต่อ */
+    .contact-box {
+      background: var(--card); border-radius: 14px; padding: 30px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+    .contact-box form { display: grid; gap: 12px; margin-top: 18px; }
+    input, textarea {
+      width: 100%; padding: 12px; border-radius: 8px; font-size: 16px; font-family: inherit;
+      border: 1px solid var(--muted); background: var(--bg); color: var(--text);
+    }
+    button.send {
+      padding: 12px; border: none; border-radius: 8px; cursor: pointer;
+      background: var(--main); color: white; font-size: 17px; font-weight: bold;
+    }
+    button.send:hover { background: var(--main-dark); }
+    .links { margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .links a { color: var(--main); font-weight: bold; }
+
+    footer { text-align: center; color: var(--muted); padding: 50px 20px 30px; }
+
+    /* มือถือ */
+    @media (max-width: 700px) {
+      #burger { display: block; }
+      .menu {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--card); box-shadow: 0 8px 10px rgba(0,0,0,.1);
+      }
+      .menu.open { display: flex; }
+      .menu li { padding: 14px 20px; border-top: 1px solid var(--soft); }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>สวัสดีครับ ผมชื่อ Tuangwit Jantharat</h1>
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="#home">MyPortfolio</a>
+      <ul class="menu" id="menu">
+        <li><a href="#about">เกี่ยวกับฉัน</a></li>
+        <li><a href="#skills">ทักษะ</a></li>
+        <li><a href="#projects">ผลงาน</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
+        <li><button class="icon-btn" id="theme" title="สลับโหมดมืด/สว่าง">🌙</button></li>
+      </ul>
+      <button class="icon-btn" id="burger">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== ส่วนแรก (แก้ชื่อตรงนี้) ===== -->
+  <header class="hero" id="home">
+    <div class="avatar">ก</div>
+    <h1>สวัสดีครับ ผมชื่อ ชื่อของคุณ</h1>
     <p>นักศึกษาสาขาคอมพิวเตอร์ / เทคโนโลยีสารสนเทศ</p>
+    <a class="btn" href="#projects">ดูผลงานของผม</a>
+    <a class="btn outline" href="#contact">ติดต่อผม</a>
   </header>
 
-  <section>
+  <!-- ===== เกี่ยวกับฉัน ===== -->
+  <section id="about">
     <h2>เกี่ยวกับฉัน</h2>
-    <p>cim-comsci</p>
-  </section>
-
-  <section>
-    <h2>ทักษะ</h2>
-    <div class="skills">
-      <span class="skill">HTML</span>
-      <span class="skill">CSS</span>
-      <span class="skill">JavaScript</span>
-      <span class="skill">PHP</span>
-      <span class="skill">MySQL</span>
+    <div class="about-grid">
+      <p>
+        แก้ข้อความตรงนี้ เช่น ผมเป็นนักศึกษาปีที่ 3 สนใจการพัฒนาเว็บไซต์และระบบฐานข้อมูล
+        ชอบเรียนรู้เทคโนโลยีใหม่ๆ และอยากพัฒนาระบบที่ใช้งานได้จริงในอนาคต
+      </p>
+      <ul class="info">
+        <li><b>ชื่อ:</b> ชื่อของคุณ</li>
+        <li><b>มหาวิทยาลัย:</b> ชื่อมหาวิทยาลัย</li>
+        <li><b>สาขา:</b> คอมพิวเตอร์ / IT</li>
+        <li><b>อีเมล:</b> your@email.com</li>
+      </ul>
     </div>
   </section>
 
-  <section>
-    <h2>ติดต่อ</h2>
-    <p>สนใจพูดคุยหรือร่วมงาน ติดต่อได้ที่:</p>
-    <a class="btn" href="Bank@gmail.com">ส่งอีเมล</a>
+  <!-- ===== ทักษะ (ปรับตัวเลข % ได้) ===== -->
+  <section id="skills">
+    <h2>ทักษะ</h2>
+    <div class="skill"><div class="skill-top"><span>HTML / CSS</span><span>80%</span></div><div class="bar"><span style="width:80%"></span></div></div>
+    <div class="skill"><div class="skill-top"><span>JavaScript</span><span>60%</span></div><div class="bar"><span style="width:60%"></span></div></div>
+    <div class="skill"><div class="skill-top"><span>PHP</span><span>65%</span></div><div class="bar"><span style="width:65%"></span></div></div>
+    <div class="skill"><div class="skill-top"><span>MySQL</span><span>70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
   </section>
 
-  <footer>
-    <p>สร้างด้วย HTML และ CSS</p>
-  </footer>
+  <!-- ===== ผลงาน (คัดลอกก้อน card เพิ่มได้) ===== -->
+  <section id="projects">
+    <h2>ผลงาน</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">🖼️</div>
+        <h3>เว็บสะสมรูปภาพ</h3>
+        <p>เว็บอัปโหลดและจัดเก็บรูปภาพ มีระบบสมาชิก</p>
+        <div class="tags"><span>PHP</span><span>MySQL</span></div>
+        <a href="#">ดูผลงาน →</a>
+      </div>
+      <div class="card">
+        <div class="emoji">🏥</div>
+        <h3>ระบบจัดการคนไข้</h3>
+        <p>ระบบบันทึกข้อมูลการรักษาของโรงพยาบาล</p>
+        <div class="tags"><span>Access</span><span>Database</span></div>
+        <a href="#">ดูผลงาน →</a>
+      </div>
+      <div class="card">
+        <div class="emoji">😂</div>
+        <h3>เว็บแชร์มีม</h3>
+        <p>เว็บให้ผู้ใช้โพสต์และโหวตมีมที่ชอบ</p>
+        <div class="tags"><span>PHP</span><span>XAMPP</span></div>
+        <a href="#">ดูผลงาน →</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===== ติดต่อ ===== -->
+  <section id="contact">
+    <h2>ติดต่อ</h2>
+    <div class="contact-box">
+      <p>ส่งข้อความมาได้เลย ระบบจะเปิดแอปอีเมลของคุณให้ส่งต่อ</p>
+      <form id="form">
+        <input type="text" id="name" placeholder="ชื่อของคุณ" required>
+        <textarea id="msg" rows="4" placeholder="ข้อความ" required></textarea>
+        <button class="send" type="submit">ส่งข้อความ</button>
+      </form>
+      <div class="links">
+        <a href="https://github.com/Bank061147" target="_blank">GitHub</a>
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="mailto:your@email.com">อีเมล</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 ชื่อของคุณ · สร้างด้วย HTML CSS JavaScript</footer>
+
+  <script>
+    // เมนูมือถือ
+    var menu = document.getElementById("menu");
+    document.getElementById("burger").onclick = function () { menu.classList.toggle("open"); };
+    menu.onclick = function () { menu.classList.remove("open"); };
+
+    // โหมดมืด (จำค่าที่เลือกไว้)
+    var btn = document.getElementById("theme");
+    function setTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      btn.textContent = dark ? "☀️" : "🌙";
+      try { localStorage.setItem("dark", dark ? "1" : "0"); } catch (e) {}
+    }
+    try { if (localStorage.getItem("dark") === "1") setTheme(true); } catch (e) {}
+    btn.onclick = function () { setTheme(!document.body.classList.contains("dark")); };
+
+    // ฟอร์มติดต่อ -> เปิดแอปอีเมล (แก้ your@email.com เป็นอีเมลจริง)
+    document.getElementById("form").onsubmit = function (e) {
+      e.preventDefault();
+      var n = document.getElementById("name").value;
+      var m = document.getElementById("msg").value;
+      location.href = "mailto:your@email.com?subject=" +
+        encodeURIComponent("ติดต่อจากเว็บ: " + n) +
+        "&body=" + encodeURIComponent(m);
+    };
+  </script>
 </body>
 </html>
